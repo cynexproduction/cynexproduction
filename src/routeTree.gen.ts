@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
+import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const ApiPublicVideosRoute = ApiPublicVideosRouteImport.update({
   path: '/api/public/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
+  id: '/api/public/contact',
+  path: '/api/public/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/videos'
+  fullPaths: '/' | '/api/public/contact' | '/api/public/videos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/videos'
-  id: '__root__' | '/' | '/api/public/videos'
+  to: '/' | '/api/public/contact' | '/api/public/videos'
+  id: '__root__' | '/' | '/api/public/contact' | '/api/public/videos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicContactRoute: typeof ApiPublicContactRoute
   ApiPublicVideosRoute: typeof ApiPublicVideosRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/contact': {
+      id: '/api/public/contact'
+      path: '/api/public/contact'
+      fullPath: '/api/public/contact'
+      preLoaderRoute: typeof ApiPublicContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicContactRoute: ApiPublicContactRoute,
   ApiPublicVideosRoute: ApiPublicVideosRoute,
 }
 export const routeTree = rootRouteImport
