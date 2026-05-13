@@ -1,0 +1,118 @@
+/*
+ Theme Name:   Gentium Child
+ Theme URI:    https://themeforest.net/user/Pixerex/gentium
+ Description:  Gentium Child Theme
+ Author:       Pixerex
+ Author URI:   https://themeforest.net/user/Pixerex/portfolio
+ Template:     gentium
+ Version:      1.0.0
+*/
+
+/* Child Mobile Navigation Fix */
+.pr__mobile__nav.uk-offcanvas {
+  z-index: 99999;
+}
+.uk-offcanvas-bar {
+  width: 100vw;
+  background-color: #000;
+  -webkit-transition: 700ms cubic-bezier(0.17, 0.67, 0, 1.01);
+  -o-transition: 700ms cubic-bezier(0.17, 0.67, 0, 1.01);
+  transition: 700ms cubic-bezier(0.17, 0.67, 0, 1.01);
+}
+.offcanvas_anime .uk-offcanvas-bar {
+  left: auto;
+  right: -100vw;
+}
+@keyframes uk-fade-right {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Child Mobile Navigation Fix End */
+
+/* Child Theme Custom CSS */
+
+/* Home Page Banner Box Bottom Effect */
+.r__shape:after {
+  content: "";
+  background-color: #e50914;
+  height: 70px;
+  width: calc(100% + 20px);
+  position: absolute;
+  bottom: -20px;
+  z-index: -1;
+}
+.r2__shape:after {
+  content: "";
+  background-color: #e50914;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  z-index: -1;
+}
+@media (max-width: 960px) {
+  .r__shape:after,
+  .r2__shape:after {
+    display: none;
+  }
+}
+.pr__section:before {
+  content: "";
+  background-color: #e50914;
+  height: 60px;
+  width: 2px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+}
+.pr__flex_col .elementor-widget-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+span.pr_required {
+  color: #e9204f;
+}
+.section__flex .elementor-container.elementor-column-gap-default {
+  flex-wrap: wrap;
+}
+
+.section__flex .elementor-column {
+  width: 33.3333%;
+}
+
+/* Content View CSS */
+.pt-cv-view .pt-cv-ifield {
+  margin-bottom: 150px !important;
+}
+
+.pt-cv-wrapper .btn-success {
+  color: #fff;
+  border-radius: 3px;
+  vertical-align: middle;
+  background-color: #e50914;
+  border-color: #e50914;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+.pt-cv-thumbnail.pull-right {
+  border-radius: 10px !important;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.pt-cv-content {
+  line-height: 1.8;
+}
+/* Category Heading */
+.category-heading {
+  margin-bottom: 20px;
+}
