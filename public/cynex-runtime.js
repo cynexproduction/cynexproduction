@@ -122,7 +122,7 @@
             email: pick(/email|mail/i),
             phone: pick(/phone|mobile|tel/i),
             subject: pick(/subject|title/i) || "Website Enquiry",
-            message: pick(/message|comments?|content|details/i) || JSON.stringify(entries),
+            message: pick(/message|comments?|content|details|description|desc/i) || JSON.stringify(entries),
             source:
               location.pathname.indexOf("enquiry") > -1
                 ? "enquiry"
