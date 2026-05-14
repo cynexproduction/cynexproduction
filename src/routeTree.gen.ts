@@ -32,6 +32,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 import { Route as ApiAdminVideosRouteImport } from './routes/api/admin/videos'
+import { Route as ApiAdminScanRouteImport } from './routes/api/admin/scan'
 import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
 import { Route as ApiAdminBlogRouteImport } from './routes/api/admin/blog'
 
@@ -150,6 +151,11 @@ const ApiAdminVideosRoute = ApiAdminVideosRouteImport.update({
   path: '/api/admin/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminScanRoute = ApiAdminScanRouteImport.update({
+  id: '/api/admin/scan',
+  path: '/api/admin/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
   id: '/api/admin/login',
   path: '/api/admin/login',
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/video-production': typeof VideoProductionRoute
   '/api/admin/blog': typeof ApiAdminBlogRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/scan': typeof ApiAdminScanRoute
   '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/video-production': typeof VideoProductionRoute
   '/api/admin/blog': typeof ApiAdminBlogRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/scan': typeof ApiAdminScanRoute
   '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/video-production': typeof VideoProductionRoute
   '/api/admin/blog': typeof ApiAdminBlogRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/scan': typeof ApiAdminScanRoute
   '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
     | '/video-production'
     | '/api/admin/blog'
     | '/api/admin/login'
+    | '/api/admin/scan'
     | '/api/admin/videos'
     | '/api/public/contact'
     | '/api/public/videos'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/video-production'
     | '/api/admin/blog'
     | '/api/admin/login'
+    | '/api/admin/scan'
     | '/api/admin/videos'
     | '/api/public/contact'
     | '/api/public/videos'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/video-production'
     | '/api/admin/blog'
     | '/api/admin/login'
+    | '/api/admin/scan'
     | '/api/admin/videos'
     | '/api/public/contact'
     | '/api/public/videos'
@@ -350,6 +362,7 @@ export interface RootRouteChildren {
   VideoProductionRoute: typeof VideoProductionRoute
   ApiAdminBlogRoute: typeof ApiAdminBlogRoute
   ApiAdminLoginRoute: typeof ApiAdminLoginRoute
+  ApiAdminScanRoute: typeof ApiAdminScanRoute
   ApiAdminVideosRoute: typeof ApiAdminVideosRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
   ApiPublicVideosRoute: typeof ApiPublicVideosRoute
@@ -518,6 +531,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/scan': {
+      id: '/api/admin/scan'
+      path: '/api/admin/scan'
+      fullPath: '/api/admin/scan'
+      preLoaderRoute: typeof ApiAdminScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/login': {
       id: '/api/admin/login'
       path: '/api/admin/login'
@@ -558,6 +578,7 @@ const rootRouteChildren: RootRouteChildren = {
   VideoProductionRoute: VideoProductionRoute,
   ApiAdminBlogRoute: ApiAdminBlogRoute,
   ApiAdminLoginRoute: ApiAdminLoginRoute,
+  ApiAdminScanRoute: ApiAdminScanRoute,
   ApiAdminVideosRoute: ApiAdminVideosRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,
   ApiPublicVideosRoute: ApiPublicVideosRoute,
@@ -565,3 +586,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
