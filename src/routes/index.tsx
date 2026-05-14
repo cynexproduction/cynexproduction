@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-function Page() {
+export function Page() {
   return (
     <iframe
       src="/site/index.html"
