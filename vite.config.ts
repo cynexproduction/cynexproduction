@@ -4,12 +4,18 @@ import https from "node:https";
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import react from "@vitejs/plugin-react";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
 const LIVE_ORIGIN = "https://www.avatarstudios.in";
 const SITE_DIR = path.resolve(__dirname, "public/site");
 
 export default defineConfig({
   plugins: [
+    tanstackRouter(),
+    tanstackStart(),
+    react(),
     tsconfigPaths(),
     {
       name: "api-middleware",
