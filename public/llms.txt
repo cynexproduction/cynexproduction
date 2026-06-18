@@ -1,0 +1,34 @@
+# CYNEX Production
+
+> Creative agency and video production house in Rajkot & Ahmedabad — ad films, brand videos, corporate films, animation and documentary production.
+
+## Pages
+
+- [Home](/): Overview of CYNEX Production services and work.
+- [About](/about): Our story, team and creative philosophy.
+- [Contact](/contact): Get in touch for projects and enquiries.
+- [Enquiry](/enquiry): Send a project enquiry.
+- [Studio Rental](/studio-rental): Rent our equipped film studio.
+- [Blog](/blog): Insights on video, branding and marketing.
+
+## Services
+
+- [Video Production](/video-production-company-in-bangalore): End-to-end video production.
+- [Ad Films](/ad-films-maker-in-bangalore): High-impact ad film production.
+- [Brand Videos](/brand-video-production-services-in-bangalore): Brand storytelling films.
+- [Corporate Films](/avatar-corporate-films): Corporate films and profiles.
+- [Animation](/animation-video-makers-in-bangalore): 2D, 3D and motion graphics.
+- [Motion Graphics](/avatar-motion-graphics): Motion design and animation.
+- [Explainer Videos](/explainer-video-production-in-bangalore): Explainer video production.
+- [Music Videos](/music-video-production-services-in-bangalore): Cinematic music videos.
+- [Documentaries](/documentary-film-maker-in-bangalore): Documentary filmmaking.
+
+## Locations
+
+- [Mysore](/video-production-company-in-mysore): Video production in Mysore.
+- [Pune](/video-production-company-in-pune): Video production in Pune.
+
+## Case Studies
+
+- [Basil Woods](/avatar-case-study-basil-woods): School brand film case study.
+- [Seonics](/avatar-case-study-seonics): Corporate film case study.

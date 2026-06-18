@@ -1,62 +1,50 @@
-## Goal
-1. Keep ~20 main pages of the static site, delete the rest.
-2. Wrap each kept HTML page in a thin React/TSX route file (programmatic conversion via script — no AI rewriting of markup/styles). Visuals stay 100% identical because we serve the original HTML body inside the React shell.
-3. Change admin password to `Cynex` and convert `public/site/admin/index.html` into a real TSX route.
-4. Clean up unused scripts, JSON, and dead files.
+# Plan
 
-## Pages to keep (20)
-1. `/` → index.html
-2. `/about` → about.html
-3. `/contact` → contact.html
-4. `/enquiry` → enquiry.html
-5. `/blog` → blog.html
-6. `/career` → career/index.html
-7. `/brand-videos` → brand-video-production-services-in-bangalore/index.html
-8. `/ad-films` → ad-films-maker-in-bangalore/index.html
-9. `/corporate` → avatar-corporate-films/index.html
-10. `/animation` → avatar-motion-graphics/index.html
-11. `/documentary` → documentary-film-maker-in-bangalore/index.html
-12. `/explainer-videos` → explainer-video-production-in-bangalore/index.html
-13. `/music-videos` → music-video-production-services-in-bangalore.html
-14. `/video-production` → video-production/index.html
-15. `/creative-agency` → creative-agency-and-digital-agency/index.html
-16. `/privacy-policy` → privacy-policy/index.html
-17. `/terms` → terms-and-conditions/index.html
-18. `/refund-policy` → refund-policy/index.html
-19. `/cookie-policy` → cookie-policy/index.html
-20. `/admin` → new TSX admin (replaces admin/index.html)
+## 1. Backend setup
+- Enable **Lovable Cloud** (Supabase) — gives us auth, DB, and server functions.
+- Connect **Brevo** (recommended) or **Resend** via the connector picker. Email will be sent from `Cynexproduction7@gmail.com` once you verify that address as a sender in Brevo/Resend.
+- Store any extra creds as secrets (never in code). **Rotate the Gmail app password now** — Gmail SMTP isn't used in this setup, but the password is already exposed in chat.
 
-## Approach (no AI rewriting)
-- Write a Node script `scripts/build-routes.mjs` that:
-  - Reads each kept HTML file
-  - Extracts `<head>` (title/meta) and `<body>` innerHTML
-  - Emits a TSX file under `src/routes/<slug>.tsx` that:
-    - Sets `head()` from extracted title/meta
-    - Renders `<div dangerouslySetInnerHTML={{ __html: bodyHtml }} />` plus the original `<link>`/`<script>` tags injected via the route component
-  - This preserves every pixel of styling because we keep the original WP/Elementor HTML+CSS+JS untouched.
-- Keep `public/site/wp-content/...` assets so absolute paths in the HTML still resolve.
-- Delete every other `public/site/*.html` page and orphan folders.
+## 2. Database (Lovable Cloud)
+- `video_slots` — `slot_key` (text, unique, e.g. `home_hero`, `about_intro`), `youtube_url` (text), `title` (text), `updated_at`. Public read, admin write.
+- `form_submissions` — `id`, `form_type`, `name`, `email`, `phone`, `message`, `payload jsonb`, `created_at`. Admin read, anon insert.
+- `user_roles` + `has_role()` SECURITY DEFINER function (per Lovable role pattern). One admin row inserted for your email.
 
-## Admin page
-- Convert `public/site/admin/index.html` → `src/routes/admin.tsx` (TSX, same UI).
-- Update password env: set `ADMIN_PASSWORD=Cynex` via secrets tool.
-- Login posts to existing `/api/admin/login`; videos & blog managed via existing endpoints.
-- Old `public/site/admin/index.html` deleted.
+## 3. Admin panel (`/admin`)
+- Email/password login via Lovable Cloud.
+- Protected by `_authenticated` layout + admin-role check.
+- Pages:
+  - **Videos** — list of known slots, paste YouTube URL per slot, save.
+  - **Submissions** — table of all form entries with date/search.
+- Login page at `/login`, you'll receive credentials after I create the admin user (or you sign up once and I promote you to admin).
 
-## Cleanup
-Delete:
-- All `public/site/*.html` and subfolders not in the keep-list (~180+ pages).
-- `scratch/`, `scan-videos.js`, `scripts/debug-*.mjs`, `scripts/parse-yt-channel.mjs`, `scripts/inspect-yt-data.mjs`, `scripts/sweep-html-youtube-to-channel.mjs`, `channel-videos.json`, `database.json`, empty `data/videos.json`.
-- Stale `video_overrides` table is ignored (data already migrated to `site_videos`).
+## 4. Site-wide cleanup (all `public/site/*.html`)
+- **Remove videos**: strip all `<iframe>` embeds for YouTube/Vimeo, all `.elementor-widget-video`, all `background_video` settings, all `.eaelsv-sticky-player`. Replace hero video areas with a single `<div data-cynex-video-slot="home_hero">` placeholder that `cynex-fix.js` hydrates from the `video_slots` API.
+- **Remove third-party brand logos**: client-logo carousels / partner-logo sections (image filenames like client/partner/brand logos in `wp-content/uploads/`). I'll detect them by scanning carousel widgets and delete those sections.
+- **Remove Hyderabad**: delete all text mentions, nav links, footer entries, schema, and the `video-production-company-in-hyderabad` page if it exists. Update sitemap, llms.txt, megamenu HTML.
 
-## Verification
-- Build passes.
-- Each of the 20 routes renders identical to the previous static page.
-- `/admin` loads, login with `Cynex` works, video/blog CRUD round-trips.
-- Animation page shows YouTube videos from Supabase.
+## 5. Forms
+- Replace existing form submit handlers with a fetch to a server function `submitForm`.
+- Server fn: validate with Zod → insert into `form_submissions` → send email via Brevo/Resend gateway to `Cynexproduction7@gmail.com`.
+- Works for contact, enquiry, career, popup forms.
 
-## Tradeoffs
-- Pages are still the original WordPress/Elementor HTML — this is intentional ("don't change the look"). They are now served through TanStack routes, so navigation between them benefits from router preloading.
-- No SSR-friendly React rewrite of the markup (would change visuals).
+## 6. Video slot rendering
+- New endpoint `/api/public/video-slots` returns all slot URLs.
+- `cynex-fix.js` fetches once, then for each `[data-cynex-video-slot="KEY"]` injects a muted/autoplay YouTube iframe (background) or a clickable poster (inline).
+- If a slot is empty, the area collapses cleanly.
 
-Reply **approve** to start.
+## Order of execution
+1. Enable Cloud + connect Brevo/Resend.
+2. DB migration (tables, RLS, roles, grants).
+3. Server functions (`submitForm`, video CRUD) + public video-slots API.
+4. Admin UI + login.
+5. HTML cleanup script (videos, brand logos, Hyderabad) — one pass over all pages.
+6. Update `cynex-fix.js` to hydrate slots and remove all old video-mount logic.
+
+## Open questions before I start
+- **A. Brevo or Resend?** Both work — Brevo has a more generous free tier; Resend is simpler. I'll default to **Resend** if you don't say otherwise.
+- **B. Client/partner logo sections** — should I remove them entirely, or replace with a "Trusted by" placeholder you can later fill in?
+- **C. Admin email** — confirm the admin login email. I'll default to `Cynexproduction7@gmail.com`. You'll set the password on first login via a reset link.
+- **D. Hyderabad page** — is there an existing `/video-production-company-in-hyderabad`? I'll search and remove if found.
+
+Reply with answers (or just "go with defaults") and I'll execute end-to-end.

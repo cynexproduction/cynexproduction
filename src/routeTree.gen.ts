@@ -9,36 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VideoProductionRouteImport } from './routes/video-production'
+import { Route as VideoProductionCompanyRouteImport } from './routes/video-production-company'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as MusicVideosRouteImport } from './routes/music-videos'
-import { Route as ExplainerVideosRouteImport } from './routes/explainer-videos'
+import { Route as StudioRentalRouteImport } from './routes/studio-rental'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MusicVideoProductionServicesRouteImport } from './routes/music-video-production-services'
+import { Route as MotionGraphicsRouteImport } from './routes/motion-graphics'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as ExplainerVideoProductionRouteImport } from './routes/explainer-video-production'
 import { Route as EnquiryRouteImport } from './routes/enquiry'
-import { Route as DocumentaryRouteImport } from './routes/documentary'
-import { Route as CreativeAgencyRouteImport } from './routes/creative-agency'
-import { Route as CorporateRouteImport } from './routes/corporate'
-import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as DocumentaryFilmMakerRouteImport } from './routes/documentary-film-maker'
+import { Route as CorporateFilmsRouteImport } from './routes/corporate-films'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CareerRouteImport } from './routes/career'
-import { Route as BrandVideosRouteImport } from './routes/brand-videos'
+import { Route as BrandVideoProductionServicesRouteImport } from './routes/brand-video-production-services'
 import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AnimationRouteImport } from './routes/animation'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AdFilmsRouteImport } from './routes/ad-films'
+import { Route as AnimationVideosRouteImport } from './routes/animation-videos'
+import { Route as AdFilmsMakerRouteImport } from './routes/ad-films-maker'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
-import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
-import { Route as ApiAdminVideosRouteImport } from './routes/api/admin/videos'
-import { Route as ApiAdminScanRouteImport } from './routes/api/admin/scan'
-import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
-import { Route as ApiAdminBlogRouteImport } from './routes/api/admin/blog'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as ApiPublicVideoSlotsRouteImport } from './routes/api/public/video-slots'
+import { Route as ApiPublicSubmitFormRouteImport } from './routes/api/public/submit-form'
+import { Route as AuthenticatedAdminVideosRouteImport } from './routes/_authenticated/admin.videos'
+import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin.submissions'
+import { Route as AuthenticatedAdminBlogsRouteImport } from './routes/_authenticated/admin.blogs'
 
-const VideoProductionRoute = VideoProductionRouteImport.update({
-  id: '/video-production',
-  path: '/video-production',
+const VideoProductionCompanyRoute = VideoProductionCompanyRouteImport.update({
+  id: '/video-production-company',
+  path: '/video-production-company',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -46,49 +47,56 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RefundPolicyRoute = RefundPolicyRouteImport.update({
-  id: '/refund-policy',
-  path: '/refund-policy',
+const StudioRentalRoute = StudioRentalRouteImport.update({
+  id: '/studio-rental',
+  path: '/studio-rental',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MusicVideosRoute = MusicVideosRouteImport.update({
-  id: '/music-videos',
-  path: '/music-videos',
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExplainerVideosRoute = ExplainerVideosRouteImport.update({
-  id: '/explainer-videos',
-  path: '/explainer-videos',
+const MusicVideoProductionServicesRoute =
+  MusicVideoProductionServicesRouteImport.update({
+    id: '/music-video-production-services',
+    path: '/music-video-production-services',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MotionGraphicsRoute = MotionGraphicsRouteImport.update({
+  id: '/motion-graphics',
+  path: '/motion-graphics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplainerVideoProductionRoute =
+  ExplainerVideoProductionRouteImport.update({
+    id: '/explainer-video-production',
+    path: '/explainer-video-production',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EnquiryRoute = EnquiryRouteImport.update({
   id: '/enquiry',
   path: '/enquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocumentaryRoute = DocumentaryRouteImport.update({
-  id: '/documentary',
-  path: '/documentary',
+const DocumentaryFilmMakerRoute = DocumentaryFilmMakerRouteImport.update({
+  id: '/documentary-film-maker',
+  path: '/documentary-film-maker',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CreativeAgencyRoute = CreativeAgencyRouteImport.update({
-  id: '/creative-agency',
-  path: '/creative-agency',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CorporateRoute = CorporateRouteImport.update({
-  id: '/corporate',
-  path: '/corporate',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiePolicyRoute = CookiePolicyRouteImport.update({
-  id: '/cookie-policy',
-  path: '/cookie-policy',
+const CorporateFilmsRoute = CorporateFilmsRouteImport.update({
+  id: '/corporate-films',
+  path: '/corporate-films',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -96,34 +104,25 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CareerRoute = CareerRouteImport.update({
-  id: '/career',
-  path: '/career',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandVideosRoute = BrandVideosRouteImport.update({
-  id: '/brand-videos',
-  path: '/brand-videos',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const BrandVideoProductionServicesRoute =
+  BrandVideoProductionServicesRouteImport.update({
+    id: '/brand-video-production-services',
+    path: '/brand-video-production-services',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AnimationRoute = AnimationRouteImport.update({
-  id: '/animation',
-  path: '/animation',
+const AnimationVideosRoute = AnimationVideosRouteImport.update({
+  id: '/animation-videos',
+  path: '/animation-videos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdFilmsRoute = AdFilmsRouteImport.update({
-  id: '/ad-films',
-  path: '/ad-films',
+const AdFilmsMakerRoute = AdFilmsMakerRouteImport.update({
+  id: '/ad-films-maker',
+  path: '/ad-films-maker',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -131,250 +130,259 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicVideosRoute = ApiPublicVideosRouteImport.update({
-  id: '/api/public/videos',
-  path: '/api/public/videos',
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const ApiPublicVideoSlotsRoute = ApiPublicVideoSlotsRouteImport.update({
+  id: '/api/public/video-slots',
+  path: '/api/public/video-slots',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
-  id: '/api/public/contact',
-  path: '/api/public/contact',
+const ApiPublicSubmitFormRoute = ApiPublicSubmitFormRouteImport.update({
+  id: '/api/public/submit-form',
+  path: '/api/public/submit-form',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminVideosRoute = ApiAdminVideosRouteImport.update({
-  id: '/api/admin/videos',
-  path: '/api/admin/videos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminScanRoute = ApiAdminScanRouteImport.update({
-  id: '/api/admin/scan',
-  path: '/api/admin/scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
-  id: '/api/admin/login',
-  path: '/api/admin/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminBlogRoute = ApiAdminBlogRouteImport.update({
-  id: '/api/admin/blog',
-  path: '/api/admin/blog',
-  getParentRoute: () => rootRouteImport,
+const AuthenticatedAdminVideosRoute =
+  AuthenticatedAdminVideosRouteImport.update({
+    id: '/admin/videos',
+    path: '/admin/videos',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAdminSubmissionsRoute =
+  AuthenticatedAdminSubmissionsRouteImport.update({
+    id: '/admin/submissions',
+    path: '/admin/submissions',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAdminBlogsRoute = AuthenticatedAdminBlogsRouteImport.update({
+  id: '/admin/blogs',
+  path: '/admin/blogs',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/ad-films': typeof AdFilmsRoute
-  '/admin': typeof AdminRoute
-  '/animation': typeof AnimationRoute
-  '/blog': typeof BlogRoute
-  '/brand-videos': typeof BrandVideosRoute
-  '/career': typeof CareerRoute
+  '/ad-films-maker': typeof AdFilmsMakerRoute
+  '/animation-videos': typeof AnimationVideosRoute
+  '/blog': typeof BlogRouteWithChildren
+  '/brand-video-production-services': typeof BrandVideoProductionServicesRoute
   '/contact': typeof ContactRoute
-  '/cookie-policy': typeof CookiePolicyRoute
-  '/corporate': typeof CorporateRoute
-  '/creative-agency': typeof CreativeAgencyRoute
-  '/documentary': typeof DocumentaryRoute
+  '/corporate-films': typeof CorporateFilmsRoute
+  '/documentary-film-maker': typeof DocumentaryFilmMakerRoute
   '/enquiry': typeof EnquiryRoute
-  '/explainer-videos': typeof ExplainerVideosRoute
-  '/music-videos': typeof MusicVideosRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
+  '/explainer-video-production': typeof ExplainerVideoProductionRoute
+  '/mcp': typeof McpRoute
+  '/motion-graphics': typeof MotionGraphicsRoute
+  '/music-video-production-services': typeof MusicVideoProductionServicesRoute
+  '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
-  '/video-production': typeof VideoProductionRoute
-  '/api/admin/blog': typeof ApiAdminBlogRoute
-  '/api/admin/login': typeof ApiAdminLoginRoute
-  '/api/admin/scan': typeof ApiAdminScanRoute
-  '/api/admin/videos': typeof ApiAdminVideosRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
-  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/video-production-company': typeof VideoProductionCompanyRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/admin/videos': typeof AuthenticatedAdminVideosRoute
+  '/api/public/submit-form': typeof ApiPublicSubmitFormRoute
+  '/api/public/video-slots': typeof ApiPublicVideoSlotsRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/ad-films': typeof AdFilmsRoute
-  '/admin': typeof AdminRoute
-  '/animation': typeof AnimationRoute
-  '/blog': typeof BlogRoute
-  '/brand-videos': typeof BrandVideosRoute
-  '/career': typeof CareerRoute
+  '/ad-films-maker': typeof AdFilmsMakerRoute
+  '/animation-videos': typeof AnimationVideosRoute
+  '/blog': typeof BlogRouteWithChildren
+  '/brand-video-production-services': typeof BrandVideoProductionServicesRoute
   '/contact': typeof ContactRoute
-  '/cookie-policy': typeof CookiePolicyRoute
-  '/corporate': typeof CorporateRoute
-  '/creative-agency': typeof CreativeAgencyRoute
-  '/documentary': typeof DocumentaryRoute
+  '/corporate-films': typeof CorporateFilmsRoute
+  '/documentary-film-maker': typeof DocumentaryFilmMakerRoute
   '/enquiry': typeof EnquiryRoute
-  '/explainer-videos': typeof ExplainerVideosRoute
-  '/music-videos': typeof MusicVideosRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
+  '/explainer-video-production': typeof ExplainerVideoProductionRoute
+  '/mcp': typeof McpRoute
+  '/motion-graphics': typeof MotionGraphicsRoute
+  '/music-video-production-services': typeof MusicVideoProductionServicesRoute
+  '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
-  '/video-production': typeof VideoProductionRoute
-  '/api/admin/blog': typeof ApiAdminBlogRoute
-  '/api/admin/login': typeof ApiAdminLoginRoute
-  '/api/admin/scan': typeof ApiAdminScanRoute
-  '/api/admin/videos': typeof ApiAdminVideosRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
-  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/video-production-company': typeof VideoProductionCompanyRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/admin/videos': typeof AuthenticatedAdminVideosRoute
+  '/api/public/submit-form': typeof ApiPublicSubmitFormRoute
+  '/api/public/video-slots': typeof ApiPublicVideoSlotsRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
-  '/ad-films': typeof AdFilmsRoute
-  '/admin': typeof AdminRoute
-  '/animation': typeof AnimationRoute
-  '/blog': typeof BlogRoute
-  '/brand-videos': typeof BrandVideosRoute
-  '/career': typeof CareerRoute
+  '/ad-films-maker': typeof AdFilmsMakerRoute
+  '/animation-videos': typeof AnimationVideosRoute
+  '/blog': typeof BlogRouteWithChildren
+  '/brand-video-production-services': typeof BrandVideoProductionServicesRoute
   '/contact': typeof ContactRoute
-  '/cookie-policy': typeof CookiePolicyRoute
-  '/corporate': typeof CorporateRoute
-  '/creative-agency': typeof CreativeAgencyRoute
-  '/documentary': typeof DocumentaryRoute
+  '/corporate-films': typeof CorporateFilmsRoute
+  '/documentary-film-maker': typeof DocumentaryFilmMakerRoute
   '/enquiry': typeof EnquiryRoute
-  '/explainer-videos': typeof ExplainerVideosRoute
-  '/music-videos': typeof MusicVideosRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
+  '/explainer-video-production': typeof ExplainerVideoProductionRoute
+  '/mcp': typeof McpRoute
+  '/motion-graphics': typeof MotionGraphicsRoute
+  '/music-video-production-services': typeof MusicVideoProductionServicesRoute
+  '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
-  '/video-production': typeof VideoProductionRoute
-  '/api/admin/blog': typeof ApiAdminBlogRoute
-  '/api/admin/login': typeof ApiAdminLoginRoute
-  '/api/admin/scan': typeof ApiAdminScanRoute
-  '/api/admin/videos': typeof ApiAdminVideosRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
-  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/video-production-company': typeof VideoProductionCompanyRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/_authenticated/admin/blogs': typeof AuthenticatedAdminBlogsRoute
+  '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/_authenticated/admin/videos': typeof AuthenticatedAdminVideosRoute
+  '/api/public/submit-form': typeof ApiPublicSubmitFormRoute
+  '/api/public/video-slots': typeof ApiPublicVideoSlotsRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/ad-films'
-    | '/admin'
-    | '/animation'
+    | '/ad-films-maker'
+    | '/animation-videos'
     | '/blog'
-    | '/brand-videos'
-    | '/career'
+    | '/brand-video-production-services'
     | '/contact'
-    | '/cookie-policy'
-    | '/corporate'
-    | '/creative-agency'
-    | '/documentary'
+    | '/corporate-films'
+    | '/documentary-film-maker'
     | '/enquiry'
-    | '/explainer-videos'
-    | '/music-videos'
-    | '/privacy-policy'
-    | '/refund-policy'
+    | '/explainer-video-production'
+    | '/mcp'
+    | '/motion-graphics'
+    | '/music-video-production-services'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/studio-rental'
     | '/terms'
-    | '/video-production'
-    | '/api/admin/blog'
-    | '/api/admin/login'
-    | '/api/admin/scan'
-    | '/api/admin/videos'
-    | '/api/public/contact'
-    | '/api/public/videos'
+    | '/video-production-company'
+    | '/blog/$slug'
+    | '/admin/blogs'
+    | '/admin/submissions'
+    | '/admin/videos'
+    | '/api/public/submit-form'
+    | '/api/public/video-slots'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/ad-films'
-    | '/admin'
-    | '/animation'
+    | '/ad-films-maker'
+    | '/animation-videos'
     | '/blog'
-    | '/brand-videos'
-    | '/career'
+    | '/brand-video-production-services'
     | '/contact'
-    | '/cookie-policy'
-    | '/corporate'
-    | '/creative-agency'
-    | '/documentary'
+    | '/corporate-films'
+    | '/documentary-film-maker'
     | '/enquiry'
-    | '/explainer-videos'
-    | '/music-videos'
-    | '/privacy-policy'
-    | '/refund-policy'
+    | '/explainer-video-production'
+    | '/mcp'
+    | '/motion-graphics'
+    | '/music-video-production-services'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/studio-rental'
     | '/terms'
-    | '/video-production'
-    | '/api/admin/blog'
-    | '/api/admin/login'
-    | '/api/admin/scan'
-    | '/api/admin/videos'
-    | '/api/public/contact'
-    | '/api/public/videos'
+    | '/video-production-company'
+    | '/blog/$slug'
+    | '/admin/blogs'
+    | '/admin/submissions'
+    | '/admin/videos'
+    | '/api/public/submit-form'
+    | '/api/public/video-slots'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
-    | '/ad-films'
-    | '/admin'
-    | '/animation'
+    | '/ad-films-maker'
+    | '/animation-videos'
     | '/blog'
-    | '/brand-videos'
-    | '/career'
+    | '/brand-video-production-services'
     | '/contact'
-    | '/cookie-policy'
-    | '/corporate'
-    | '/creative-agency'
-    | '/documentary'
+    | '/corporate-films'
+    | '/documentary-film-maker'
     | '/enquiry'
-    | '/explainer-videos'
-    | '/music-videos'
-    | '/privacy-policy'
-    | '/refund-policy'
+    | '/explainer-video-production'
+    | '/mcp'
+    | '/motion-graphics'
+    | '/music-video-production-services'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/studio-rental'
     | '/terms'
-    | '/video-production'
-    | '/api/admin/blog'
-    | '/api/admin/login'
-    | '/api/admin/scan'
-    | '/api/admin/videos'
-    | '/api/public/contact'
-    | '/api/public/videos'
+    | '/video-production-company'
+    | '/blog/$slug'
+    | '/_authenticated/admin/blogs'
+    | '/_authenticated/admin/submissions'
+    | '/_authenticated/admin/videos'
+    | '/api/public/submit-form'
+    | '/api/public/video-slots'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AdFilmsRoute: typeof AdFilmsRoute
-  AdminRoute: typeof AdminRoute
-  AnimationRoute: typeof AnimationRoute
-  BlogRoute: typeof BlogRoute
-  BrandVideosRoute: typeof BrandVideosRoute
-  CareerRoute: typeof CareerRoute
+  AdFilmsMakerRoute: typeof AdFilmsMakerRoute
+  AnimationVideosRoute: typeof AnimationVideosRoute
+  BlogRoute: typeof BlogRouteWithChildren
+  BrandVideoProductionServicesRoute: typeof BrandVideoProductionServicesRoute
   ContactRoute: typeof ContactRoute
-  CookiePolicyRoute: typeof CookiePolicyRoute
-  CorporateRoute: typeof CorporateRoute
-  CreativeAgencyRoute: typeof CreativeAgencyRoute
-  DocumentaryRoute: typeof DocumentaryRoute
+  CorporateFilmsRoute: typeof CorporateFilmsRoute
+  DocumentaryFilmMakerRoute: typeof DocumentaryFilmMakerRoute
   EnquiryRoute: typeof EnquiryRoute
-  ExplainerVideosRoute: typeof ExplainerVideosRoute
-  MusicVideosRoute: typeof MusicVideosRoute
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  RefundPolicyRoute: typeof RefundPolicyRoute
+  ExplainerVideoProductionRoute: typeof ExplainerVideoProductionRoute
+  McpRoute: typeof McpRoute
+  MotionGraphicsRoute: typeof MotionGraphicsRoute
+  MusicVideoProductionServicesRoute: typeof MusicVideoProductionServicesRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StudioRentalRoute: typeof StudioRentalRoute
   TermsRoute: typeof TermsRoute
-  VideoProductionRoute: typeof VideoProductionRoute
-  ApiAdminBlogRoute: typeof ApiAdminBlogRoute
-  ApiAdminLoginRoute: typeof ApiAdminLoginRoute
-  ApiAdminScanRoute: typeof ApiAdminScanRoute
-  ApiAdminVideosRoute: typeof ApiAdminVideosRoute
-  ApiPublicContactRoute: typeof ApiPublicContactRoute
-  ApiPublicVideosRoute: typeof ApiPublicVideosRoute
+  VideoProductionCompanyRoute: typeof VideoProductionCompanyRoute
+  ApiPublicSubmitFormRoute: typeof ApiPublicSubmitFormRoute
+  ApiPublicVideoSlotsRoute: typeof ApiPublicVideoSlotsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/video-production': {
-      id: '/video-production'
-      path: '/video-production'
-      fullPath: '/video-production'
-      preLoaderRoute: typeof VideoProductionRouteImport
+    '/video-production-company': {
+      id: '/video-production-company'
+      path: '/video-production-company'
+      fullPath: '/video-production-company'
+      preLoaderRoute: typeof VideoProductionCompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -384,32 +392,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/refund-policy': {
-      id: '/refund-policy'
-      path: '/refund-policy'
-      fullPath: '/refund-policy'
-      preLoaderRoute: typeof RefundPolicyRouteImport
+    '/studio-rental': {
+      id: '/studio-rental'
+      path: '/studio-rental'
+      fullPath: '/studio-rental'
+      preLoaderRoute: typeof StudioRentalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/music-videos': {
-      id: '/music-videos'
-      path: '/music-videos'
-      fullPath: '/music-videos'
-      preLoaderRoute: typeof MusicVideosRouteImport
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/explainer-videos': {
-      id: '/explainer-videos'
-      path: '/explainer-videos'
-      fullPath: '/explainer-videos'
-      preLoaderRoute: typeof ExplainerVideosRouteImport
+    '/music-video-production-services': {
+      id: '/music-video-production-services'
+      path: '/music-video-production-services'
+      fullPath: '/music-video-production-services'
+      preLoaderRoute: typeof MusicVideoProductionServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/motion-graphics': {
+      id: '/motion-graphics'
+      path: '/motion-graphics'
+      fullPath: '/motion-graphics'
+      preLoaderRoute: typeof MotionGraphicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explainer-video-production': {
+      id: '/explainer-video-production'
+      path: '/explainer-video-production'
+      fullPath: '/explainer-video-production'
+      preLoaderRoute: typeof ExplainerVideoProductionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enquiry': {
@@ -419,32 +448,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/documentary': {
-      id: '/documentary'
-      path: '/documentary'
-      fullPath: '/documentary'
-      preLoaderRoute: typeof DocumentaryRouteImport
+    '/documentary-film-maker': {
+      id: '/documentary-film-maker'
+      path: '/documentary-film-maker'
+      fullPath: '/documentary-film-maker'
+      preLoaderRoute: typeof DocumentaryFilmMakerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/creative-agency': {
-      id: '/creative-agency'
-      path: '/creative-agency'
-      fullPath: '/creative-agency'
-      preLoaderRoute: typeof CreativeAgencyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/corporate': {
-      id: '/corporate'
-      path: '/corporate'
-      fullPath: '/corporate'
-      preLoaderRoute: typeof CorporateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookie-policy': {
-      id: '/cookie-policy'
-      path: '/cookie-policy'
-      fullPath: '/cookie-policy'
-      preLoaderRoute: typeof CookiePolicyRouteImport
+    '/corporate-films': {
+      id: '/corporate-films'
+      path: '/corporate-films'
+      fullPath: '/corporate-films'
+      preLoaderRoute: typeof CorporateFilmsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -454,18 +469,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/career': {
-      id: '/career'
-      path: '/career'
-      fullPath: '/career'
-      preLoaderRoute: typeof CareerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brand-videos': {
-      id: '/brand-videos'
-      path: '/brand-videos'
-      fullPath: '/brand-videos'
-      preLoaderRoute: typeof BrandVideosRouteImport
+    '/brand-video-production-services': {
+      id: '/brand-video-production-services'
+      path: '/brand-video-production-services'
+      fullPath: '/brand-video-production-services'
+      preLoaderRoute: typeof BrandVideoProductionServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -475,25 +483,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/animation': {
-      id: '/animation'
-      path: '/animation'
-      fullPath: '/animation'
-      preLoaderRoute: typeof AnimationRouteImport
+    '/animation-videos': {
+      id: '/animation-videos'
+      path: '/animation-videos'
+      fullPath: '/animation-videos'
+      preLoaderRoute: typeof AnimationVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ad-films': {
-      id: '/ad-films'
-      path: '/ad-films'
-      fullPath: '/ad-films'
-      preLoaderRoute: typeof AdFilmsRouteImport
+    '/ad-films-maker': {
+      id: '/ad-films-maker'
+      path: '/ad-films-maker'
+      fullPath: '/ad-films-maker'
+      preLoaderRoute: typeof AdFilmsMakerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -503,6 +504,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -510,88 +518,120 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/videos': {
-      id: '/api/public/videos'
-      path: '/api/public/videos'
-      fullPath: '/api/public/videos'
-      preLoaderRoute: typeof ApiPublicVideosRouteImport
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/api/public/video-slots': {
+      id: '/api/public/video-slots'
+      path: '/api/public/video-slots'
+      fullPath: '/api/public/video-slots'
+      preLoaderRoute: typeof ApiPublicVideoSlotsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/contact': {
-      id: '/api/public/contact'
-      path: '/api/public/contact'
-      fullPath: '/api/public/contact'
-      preLoaderRoute: typeof ApiPublicContactRouteImport
+    '/api/public/submit-form': {
+      id: '/api/public/submit-form'
+      path: '/api/public/submit-form'
+      fullPath: '/api/public/submit-form'
+      preLoaderRoute: typeof ApiPublicSubmitFormRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/videos': {
-      id: '/api/admin/videos'
-      path: '/api/admin/videos'
-      fullPath: '/api/admin/videos'
-      preLoaderRoute: typeof ApiAdminVideosRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authenticated/admin/videos': {
+      id: '/_authenticated/admin/videos'
+      path: '/admin/videos'
+      fullPath: '/admin/videos'
+      preLoaderRoute: typeof AuthenticatedAdminVideosRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/api/admin/scan': {
-      id: '/api/admin/scan'
-      path: '/api/admin/scan'
-      fullPath: '/api/admin/scan'
-      preLoaderRoute: typeof ApiAdminScanRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authenticated/admin/submissions': {
+      id: '/_authenticated/admin/submissions'
+      path: '/admin/submissions'
+      fullPath: '/admin/submissions'
+      preLoaderRoute: typeof AuthenticatedAdminSubmissionsRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/api/admin/login': {
-      id: '/api/admin/login'
-      path: '/api/admin/login'
-      fullPath: '/api/admin/login'
-      preLoaderRoute: typeof ApiAdminLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/blog': {
-      id: '/api/admin/blog'
-      path: '/api/admin/blog'
-      fullPath: '/api/admin/blog'
-      preLoaderRoute: typeof ApiAdminBlogRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authenticated/admin/blogs': {
+      id: '/_authenticated/admin/blogs'
+      path: '/admin/blogs'
+      fullPath: '/admin/blogs'
+      preLoaderRoute: typeof AuthenticatedAdminBlogsRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedAdminBlogsRoute: typeof AuthenticatedAdminBlogsRoute
+  AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
+  AuthenticatedAdminVideosRoute: typeof AuthenticatedAdminVideosRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAdminBlogsRoute: AuthenticatedAdminBlogsRoute,
+  AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
+  AuthenticatedAdminVideosRoute: AuthenticatedAdminVideosRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
-  AdFilmsRoute: AdFilmsRoute,
-  AdminRoute: AdminRoute,
-  AnimationRoute: AnimationRoute,
-  BlogRoute: BlogRoute,
-  BrandVideosRoute: BrandVideosRoute,
-  CareerRoute: CareerRoute,
+  AdFilmsMakerRoute: AdFilmsMakerRoute,
+  AnimationVideosRoute: AnimationVideosRoute,
+  BlogRoute: BlogRouteWithChildren,
+  BrandVideoProductionServicesRoute: BrandVideoProductionServicesRoute,
   ContactRoute: ContactRoute,
-  CookiePolicyRoute: CookiePolicyRoute,
-  CorporateRoute: CorporateRoute,
-  CreativeAgencyRoute: CreativeAgencyRoute,
-  DocumentaryRoute: DocumentaryRoute,
+  CorporateFilmsRoute: CorporateFilmsRoute,
+  DocumentaryFilmMakerRoute: DocumentaryFilmMakerRoute,
   EnquiryRoute: EnquiryRoute,
-  ExplainerVideosRoute: ExplainerVideosRoute,
-  MusicVideosRoute: MusicVideosRoute,
-  PrivacyPolicyRoute: PrivacyPolicyRoute,
-  RefundPolicyRoute: RefundPolicyRoute,
+  ExplainerVideoProductionRoute: ExplainerVideoProductionRoute,
+  McpRoute: McpRoute,
+  MotionGraphicsRoute: MotionGraphicsRoute,
+  MusicVideoProductionServicesRoute: MusicVideoProductionServicesRoute,
+  PrivacyRoute: PrivacyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StudioRentalRoute: StudioRentalRoute,
   TermsRoute: TermsRoute,
-  VideoProductionRoute: VideoProductionRoute,
-  ApiAdminBlogRoute: ApiAdminBlogRoute,
-  ApiAdminLoginRoute: ApiAdminLoginRoute,
-  ApiAdminScanRoute: ApiAdminScanRoute,
-  ApiAdminVideosRoute: ApiAdminVideosRoute,
-  ApiPublicContactRoute: ApiPublicContactRoute,
-  ApiPublicVideosRoute: ApiPublicVideosRoute,
+  VideoProductionCompanyRoute: VideoProductionCompanyRoute,
+  ApiPublicSubmitFormRoute: ApiPublicSubmitFormRoute,
+  ApiPublicVideoSlotsRoute: ApiPublicVideoSlotsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }
