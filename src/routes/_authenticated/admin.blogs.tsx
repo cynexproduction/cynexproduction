@@ -20,6 +20,7 @@ import FontFamily from "@tiptap/extension-font-family";
 type Blog = {
   id: string; title: string; slug: string; content: string;
   excerpt: string | null; published: boolean; created_at: string; updated_at: string;
+  featured_image: string | null;
 };
 
 export const Route = createFileRoute("/_authenticated/admin/blogs")({
@@ -47,7 +48,7 @@ function BlogsAdmin() {
     return <BlogEditor blog={editing} onSave={async (b) => {
       setSaving(true); setMsg("");
       const now = Timestamp.now().toDate().toISOString();
-      const data = { title: b.title, slug: b.slug, content: b.content, excerpt: b.excerpt, published: b.published, updated_at: now };
+      const data = { title: b.title, slug: b.slug, content: b.content, excerpt: b.excerpt, published: b.published, featured_image: b.featured_image, updated_at: now };
       try {
         if (b.id) {
           await updateDoc(doc(db, "blogs", b.id), data);
@@ -64,7 +65,7 @@ function BlogsAdmin() {
   }
 
   const createNew = () => {
-    setEditing({ id: "", title: "", slug: "", content: "<p></p>", excerpt: "", published: false, created_at: "", updated_at: "" });
+    setEditing({ id: "", title: "", slug: "", content: "<p></p>", excerpt: "", published: false, created_at: "", updated_at: "", featured_image: "" });
   };
 
   const remove = async (id: string) => {
@@ -106,6 +107,7 @@ function BlogEditor({ blog, onSave, onCancel, saving, msg }: {
   const [title, setTitle] = useState(blog.title);
   const [slug, setSlug] = useState(blog.slug);
   const [excerpt, setExcerpt] = useState(blog.excerpt || "");
+  const [featuredImage, setFeaturedImage] = useState(blog.featured_image || "");
   const [published, setPublished] = useState(blog.published);
   const [showPreview, setShowPreview] = useState(false);
   const [showHtml, setShowHtml] = useState(false);
@@ -212,7 +214,7 @@ function BlogEditor({ blog, onSave, onCancel, saving, msg }: {
     if (!content || content === "<p></p>") { alert("Content is empty."); return; }
     if (!title.trim()) { alert("Title is required."); return; }
     const finalSlug = slug.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    onSave({ ...blog, title, slug: finalSlug, content, excerpt, published });
+    onSave({ ...blog, title, slug: finalSlug, content, excerpt, published, featured_image: featuredImage });
   };
 
   const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -251,6 +253,11 @@ function BlogEditor({ blog, onSave, onCancel, saving, msg }: {
           <input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="my-blog-post" style={{ ...input, flex: 1, minWidth: 150 }} />
           <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} style={{ display: "none" }} />
           <button onClick={() => fileInputRef.current?.click()} style={btnGhostSmall}>Upload Image</button>
+        </div>
+        <div style={{ display: "flex", gap: 10, marginBottom: 12, alignItems: "center" }}>
+          <span style={{ fontSize: 12, color: "#888", whiteSpace: "nowrap" }}>Featured Image:</span>
+          <input value={featuredImage} onChange={(e) => setFeaturedImage(e.target.value)} placeholder="https://example.com/image.jpg" style={{ ...input, flex: 1, minWidth: 150 }} />
+          {featuredImage && <img src={featuredImage} alt="" style={{ width: 60, height: 40, objectFit: "cover", borderRadius: 4, border: "1px solid #333" }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />}
         </div>
         <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="Short excerpt / summary…" style={{ ...input, width: "100%", minHeight: 56, marginBottom: 12, resize: "vertical", fontFamily: "inherit" }} />
         <div style={{ border: "1px solid #333", borderRadius: 6, overflow: "hidden", marginBottom: 12, background: "#0a0a0a" }}>

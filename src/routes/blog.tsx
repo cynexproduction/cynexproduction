@@ -10,6 +10,7 @@ type BlogPost = {
   title: string;
   slug: string;
   excerpt: string | null;
+  featured_image: string | null;
   created_at: string;
 };
 
@@ -71,23 +72,30 @@ function BlogPage() {
                 <p className="text-[#7A7A7A]">Check back soon for new articles and insights.</p>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
                   <Link
                     key={post.id}
                     to="/blog/$slug"
                     params={{ slug: post.slug }}
-                    className="block bg-white border border-[#ddd] rounded-lg p-6 hover:border-primary transition-colors group"
+                    className="block bg-white border border-[#ddd] rounded-lg overflow-hidden hover:border-primary transition-colors group"
                   >
-                    <div className="text-xs text-[#999] uppercase tracking-wider mb-2">
-                      {new Date(post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                    </div>
-                    <h2 className="text-xl font-semibold text-[#101010] group-hover:text-primary transition-colors mb-2">
-                      {post.title}
-                    </h2>
-                    {post.excerpt && (
-                      <p className="text-sm text-[#666]">{post.excerpt}</p>
+                    {post.featured_image && (
+                      <div className="aspect-video overflow-hidden bg-[#f5f5f5]">
+                        <img src={post.featured_image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      </div>
                     )}
+                    <div className="p-5">
+                      <div className="text-xs text-[#999] uppercase tracking-wider mb-2">
+                        {new Date(post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                      </div>
+                      <h2 className="text-lg font-semibold text-[#101010] group-hover:text-primary transition-colors mb-2">
+                        {post.title}
+                      </h2>
+                      {post.excerpt && (
+                        <p className="text-sm text-[#666] line-clamp-2">{post.excerpt}</p>
+                      )}
+                    </div>
                   </Link>
                 ))}
               </div>

@@ -28,6 +28,7 @@ export function createBlogMcpServer() {
       excerpt: z.string().optional().describe("Short summary / excerpt"),
       slug: z.string().optional().describe("URL slug (auto-generated from title if omitted)"),
       published: z.boolean().optional().describe("Whether the post is published (default: true)"),
+      featured_image: z.string().optional().describe("URL of the featured/hero image for the blog post"),
     },
     async (args) => {
       const now = Timestamp.now().toDate().toISOString();
@@ -44,6 +45,7 @@ export function createBlogMcpServer() {
         content: args.content,
         excerpt: args.excerpt || null,
         published: args.published ?? true,
+        featured_image: args.featured_image || null,
         created_at: now,
         updated_at: now,
       });
@@ -119,6 +121,7 @@ export function createBlogMcpServer() {
       excerpt: z.string().optional().describe("New excerpt"),
       published: z.boolean().optional().describe("Published status"),
       new_slug: z.string().optional().describe("New slug (if changing the URL)"),
+      featured_image: z.string().optional().describe("New featured/hero image URL (set to empty string to remove)"),
     },
     async (args) => {
       const snapshot = await getDocs(query(collection(db, "blogs"), where("slug", "==", args.slug)));
@@ -132,6 +135,7 @@ export function createBlogMcpServer() {
       if (args.excerpt !== undefined) updateData.excerpt = args.excerpt;
       if (args.published !== undefined) updateData.published = args.published;
       if (args.new_slug !== undefined) updateData.slug = args.new_slug;
+      if (args.featured_image !== undefined) updateData.featured_image = args.featured_image;
 
       await updateDoc(docRef, updateData);
       return { content: [{ type: "text", text: `Blog post "${args.slug}" updated.` }] };

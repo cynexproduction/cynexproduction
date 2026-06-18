@@ -7,7 +7,7 @@ import { VideoSection } from "@/components/VideoSection";
 
 type Blog = {
   id: string; title: string; slug: string; content: string;
-  excerpt: string | null; published: boolean; created_at: string; updated_at: string;
+  excerpt: string | null; featured_image: string | null; published: boolean; created_at: string; updated_at: string;
 };
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -74,6 +74,11 @@ function BlogPostPage() {
         <div style={{ fontSize: 13, color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
           {new Date(post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
         </div>
+        {post.featured_image && (
+          <div style={{ margin: "0 0 24px", borderRadius: 8, overflow: "hidden", maxHeight: 480 }}>
+            <img src={post.featured_image} alt="" style={{ width: "100%", height: "auto", maxHeight: 480, objectFit: "cover", display: "block" }} />
+          </div>
+        )}
         <h1 style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.3, margin: "0 0 16px", letterSpacing: "-0.5px" }}>
           {post.title}
         </h1>
