@@ -20,6 +20,16 @@ function isMcpRequest(request: Request): boolean {
   return ct.includes("json") || accept.includes("json") || request.headers.has("MCP-Protocol-Version");
 }
 
+function ensureMcpAccept(request: Request): Request {
+  const accept = request.headers.get("accept") || "";
+  if (!accept.includes("text/event-stream") && accept.includes("application/json")) {
+    const h = new Headers(request.headers);
+    h.set("accept", "application/json, text/event-stream");
+    return new Request(request, { headers: h });
+  }
+  return request;
+}
+
 async function getOrCreateTransport(sessionId?: string) {
   if (sessionId && transports.has(sessionId)) {
     return transports.get(sessionId)!;
@@ -59,6 +69,7 @@ export const Route = createFileRoute("/mcp")({
           });
         }
         try {
+          request = ensureMcpAccept(request);
           const sid = request.headers.get("MCP-Session-Id") || undefined;
           const transport = await getOrCreateTransport(sid);
           const response = await transport.handleRequest(request);
@@ -72,6 +83,7 @@ export const Route = createFileRoute("/mcp")({
       },
       POST: async ({ request }) => {
         try {
+          request = ensureMcpAccept(request);
           const sid = request.headers.get("MCP-Session-Id") || undefined;
           const transport = await getOrCreateTransport(sid);
           const response = await transport.handleRequest(request);
@@ -84,6 +96,7 @@ export const Route = createFileRoute("/mcp")({
         }
       },
       DELETE: async ({ request }) => {
+        request = ensureMcpAccept(request);
         const sid = request.headers.get("MCP-Session-Id");
         if (sid) {
           const transport = transports.get(sid);
