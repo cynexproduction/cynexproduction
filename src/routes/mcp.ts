@@ -14,6 +14,12 @@ function corsHeaders() {
   };
 }
 
+function isMcpRequest(request: Request): boolean {
+  const ct = request.headers.get("content-type") || "";
+  const accept = request.headers.get("accept") || "";
+  return ct.includes("json") || accept.includes("json") || request.headers.has("MCP-Protocol-Version");
+}
+
 async function getOrCreateTransport(sessionId?: string) {
   if (sessionId && transports.has(sessionId)) {
     return transports.get(sessionId)!;
@@ -29,31 +35,60 @@ async function getOrCreateTransport(sessionId?: string) {
 }
 
 export const Route = createFileRoute("/mcp")({
+  component: () => (
+    <html>
+      <head><title>MCP Server - CYNEX Production</title></head>
+      <body style={{ fontFamily: "sans-serif", padding: 24 }}>
+        <h1>MCP Server</h1>
+        <p>This endpoint is for AI assistants (ChatGPT, Claude).</p>
+        <p>Configure it as an MCP server with URL: <code>/mcp</code></p>
+      </body>
+    </html>
+  ),
   server: {
     handlers: {
       OPTIONS: async () => {
         return new Response(null, { status: 204, headers: corsHeaders() });
       },
       GET: async ({ request }) => {
-        const sid = request.headers.get("MCP-Session-Id") || undefined;
-        const transport = await getOrCreateTransport(sid);
-        const response = await transport.handleRequest(request);
-        const headers = { ...Object.fromEntries(response.headers), ...corsHeaders() };
-        return new Response(response.body, { status: response.status, headers });
+        if (!isMcpRequest(request)) {
+          return new Response("MCP Server — use with ChatGPT/Claude", {
+            status: 200, headers: { "Content-Type": "text/plain", ...corsHeaders() },
+          });
+        }
+        try {
+          const sid = request.headers.get("MCP-Session-Id") || undefined;
+          const transport = await getOrCreateTransport(sid);
+          const response = await transport.handleRequest(request);
+          const headers = { ...Object.fromEntries(response.headers), ...corsHeaders() };
+          return new Response(response.body, { status: response.status, headers });
+        } catch (e: any) {
+          return new Response(JSON.stringify({ error: e.message }), {
+            status: 500, headers: { "Content-Type": "application/json", ...corsHeaders() },
+          });
+        }
       },
       POST: async ({ request }) => {
-        const sid = request.headers.get("MCP-Session-Id") || undefined;
-        const transport = await getOrCreateTransport(sid);
-        const response = await transport.handleRequest(request);
-        const headers = { ...Object.fromEntries(response.headers), ...corsHeaders() };
-        return new Response(response.body, { status: response.status, headers });
+        try {
+          const sid = request.headers.get("MCP-Session-Id") || undefined;
+          const transport = await getOrCreateTransport(sid);
+          const response = await transport.handleRequest(request);
+          const headers = { ...Object.fromEntries(response.headers), ...corsHeaders() };
+          return new Response(response.body, { status: response.status, headers });
+        } catch (e: any) {
+          return new Response(JSON.stringify({ error: e.message }), {
+            status: 500, headers: { "Content-Type": "application/json", ...corsHeaders() },
+          });
+        }
       },
       DELETE: async ({ request }) => {
         const sid = request.headers.get("MCP-Session-Id");
         if (sid) {
           const transport = transports.get(sid);
           if (transport) {
-            await transport.handleRequest(request);
+            try {
+              await transport.handleRequest(request);
+            } catch { /* ignore cleanup errors */ }
           }
           transports.delete(sid);
         }
