@@ -3,7 +3,7 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import { createBlogMcpServer } from "@/lib/mcp/blog-server";
 
 const transports = new Map<string, WebStandardStreamableHTTPServerTransport>();
-const blogServer = createBlogMcpServer();
+const servers = new Map<string, ReturnType<typeof createBlogMcpServer>>();
 
 function corsHeaders() {
   return {
@@ -28,9 +28,11 @@ async function getOrCreateTransport(sessionId?: string) {
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: () => sid,
   });
-  transport.onclose = () => transports.delete(sid);
+  transport.onclose = () => { transports.delete(sid); servers.delete(sid); };
   transports.set(sid, transport);
-  await blogServer.connect(transport);
+  const server = createBlogMcpServer();
+  servers.set(sid, server);
+  await server.connect(transport);
   return transport;
 }
 
@@ -91,6 +93,7 @@ export const Route = createFileRoute("/mcp")({
             } catch { /* ignore cleanup errors */ }
           }
           transports.delete(sid);
+          servers.delete(sid);
         }
         return new Response(null, { status: 204, headers: corsHeaders() });
       },
