@@ -42,18 +42,8 @@ export const Route = createFileRoute("/mcp")({
         return new Response(response.body, { status: response.status, headers });
       },
       POST: async ({ request }) => {
-        const sid = request.headers.get("MCP-Session-Id");
-        if (!sid) {
-          return new Response(JSON.stringify({ error: "MCP-Session-Id header required" }), {
-            status: 400, headers: { "Content-Type": "application/json", ...corsHeaders() },
-          });
-        }
-        const transport = transports.get(sid);
-        if (!transport) {
-          return new Response(JSON.stringify({ error: "Session not found" }), {
-            status: 404, headers: { "Content-Type": "application/json", ...corsHeaders() },
-          });
-        }
+        const sid = request.headers.get("MCP-Session-Id") || undefined;
+        const transport = await getOrCreateTransport(sid);
         const response = await transport.handleRequest(request);
         const headers = { ...Object.fromEntries(response.headers), ...corsHeaders() };
         return new Response(response.body, { status: response.status, headers });
