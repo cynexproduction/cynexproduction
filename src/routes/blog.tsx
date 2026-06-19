@@ -28,6 +28,7 @@ export const Route = createFileRoute("/blog")({
 function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const q = query(
@@ -41,6 +42,12 @@ function BlogPage() {
       setLoading(false);
     }).catch((err) => {
       console.error("Blog fetch error:", err);
+      const msg = err?.message || "Unknown error";
+      if (msg.includes("index")) {
+        setError("The blog database needs an index. Please check the browser console for the index creation link, or contact the site administrator.");
+      } else {
+        setError(msg);
+      }
       setLoading(false);
     });
   }, []);
@@ -66,6 +73,11 @@ function BlogPage() {
           <div className="max-w-4xl mx-auto">
             {loading ? (
               <div className="text-center text-[#999] py-12">Loading posts…</div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <h2 className="text-[34px] leading-[45px] font-semibold text-[#101010] mb-4">Unable to load posts</h2>
+                <p className="text-[#e50914]">{error}</p>
+              </div>
             ) : posts.length === 0 ? (
               <div className="text-center text-[#999] py-12">
                 <h2 className="text-[34px] leading-[45px] font-semibold text-[#101010] mb-4">No Posts Yet</h2>

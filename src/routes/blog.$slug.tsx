@@ -23,14 +23,13 @@ function BlogPostPage() {
 
   useEffect(() => {
     if (!slug) return;
-    const q = query(collection(db, "blogs"), where("slug", "==", slug));
+    const q = query(collection(db, "blogs"), where("slug", "==", slug), where("published", "==", true));
     getDocs(q).then((snapshot) => {
-      const doc = snapshot.docs.find((d) => d.data().published === true);
-      if (!doc) {
+      if (snapshot.empty) {
         setLoading(false);
         return;
       }
-      setPost({ id: doc.id, ...doc.data() } as Blog);
+      setPost({ id: snapshot.docs[0].id, ...snapshot.docs[0].data() } as Blog);
       setLoading(false);
     }).catch((err) => {
       console.error("Blog post fetch error:", err);
@@ -58,7 +57,19 @@ function BlogPostPage() {
     );
   }
 
-  if (!post) return null;
+  if (!post) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#f5f5f5" }}>
+        <SiteHeader />
+        <div style={{ textAlign: "center", padding: "80px 20px" }}>
+          <h1 style={{ fontSize: 28, fontWeight: 600, marginBottom: 12 }}>Post not found</h1>
+          <p style={{ color: "#999", marginBottom: 24 }}>This blog post may have been removed or is no longer available.</p>
+          <Link to="/blog" style={{ color: "#e50914", textDecoration: "none", fontWeight: 600 }}>← Back to Blog</Link>
+        </div>
+        <SiteFooter />
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#f5f5f5" }}>
