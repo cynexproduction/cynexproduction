@@ -86,6 +86,8 @@ function BlogPage() {
                     key={post.id}
                     to="/blog/$slug"
                     params={{ slug: post.slug }}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block bg-white border border-[#ddd] rounded-lg overflow-hidden hover:border-primary transition-colors group"
                   >
                     {post.featured_image && (
