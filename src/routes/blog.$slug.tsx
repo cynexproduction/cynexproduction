@@ -23,13 +23,14 @@ function BlogPostPage() {
 
   useEffect(() => {
     if (!slug) return;
-    const q = query(collection(db, "blogs"), where("slug", "==", slug), where("published", "==", true));
+    const q = query(collection(db, "blogs"), where("slug", "==", slug));
     getDocs(q).then((snapshot) => {
-      if (snapshot.empty) {
+      const match = snapshot.docs.find((d) => d.data().published === true);
+      if (!match) {
         setLoading(false);
         return;
       }
-      setPost({ id: snapshot.docs[0].id, ...snapshot.docs[0].data() } as Blog);
+      setPost({ id: match.id, ...match.data() } as Blog);
       setLoading(false);
     }).catch((err) => {
       console.error("Blog post fetch error:", err);
