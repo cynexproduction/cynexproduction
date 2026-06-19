@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db } from "@/integrations/firebase/client";
-import { collection, query, where, orderBy, getDocs, limit } from "firebase/firestore";
+import { collection, query, orderBy, getDocs, limit } from "firebase/firestore";
 import { Header, Footer } from "@/components/Layout";
 import { VideoSection } from "@/components/VideoSection";
 
@@ -11,6 +11,7 @@ type BlogPost = {
   slug: string;
   excerpt: string | null;
   featured_image: string | null;
+  published: boolean;
   created_at: string;
 };
 
@@ -33,21 +34,16 @@ function BlogPage() {
   useEffect(() => {
     const q = query(
       collection(db, "blogs"),
-      where("published", "==", true),
       orderBy("created_at", "desc"),
-      limit(20),
+      limit(30),
     );
     getDocs(q).then((snapshot) => {
-      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as BlogPost)));
+      const all = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as BlogPost));
+      setPosts(all.filter((p) => p.published === true));
       setLoading(false);
     }).catch((err) => {
       console.error("Blog fetch error:", err);
-      const msg = err?.message || "Unknown error";
-      if (msg.includes("index")) {
-        setError("The blog database needs an index. Please check the browser console for the index creation link, or contact the site administrator.");
-      } else {
-        setError(msg);
-      }
+      setError(err?.message || "Unknown error");
       setLoading(false);
     });
   }, []);
