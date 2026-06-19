@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Menu, X, Instagram, Youtube } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
@@ -87,10 +87,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex justify-center gap-3 mb-6">
           {[
-            { href: "https://www.facebook.com/ykfilms", icon: Facebook, label: "Facebook" },
             { href: "https://www.instagram.com/cynex.production", icon: Instagram, label: "Instagram" },
-            { href: "https://www.linkedin.com/company/ykfilms/", icon: Linkedin, label: "LinkedIn" },
-            { href: "https://www.youtube.com/@cynexproduction", icon: Youtube, label: "YouTube" },
+            { href: "https://www.youtube.com/@Cynex_Production", icon: Youtube, label: "YouTube" },
           ].map((s) => {
             const Icon = s.icon;
             return (

@@ -83,14 +83,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Creative video production house — ad films, brand videos, corporate films, animation, music videos and documentaries in Rajkot & Ahmedabad." },
     ],
     links: [
-      { rel: "icon", href: "/cynex-logo.png" },
-      { rel: "shortcut icon", href: "/cynex-logo.png" },
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
+      { rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon-64x64.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" },
     ],
     scripts: [
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-83Z70LEB11",
+        async: true,
+      },
+      {
+        children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-83Z70LEB11');",
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -100,9 +109,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           url: "https://cynexproduction.in",
           description: "Creative agency and video production house serving Rajkot, Ahmedabad and India.",
           sameAs: [
-            "https://www.facebook.com/ykfilms",
             "https://www.instagram.com/cynex.production",
-            "https://www.youtube.com/@cynexproduction",
+            "https://www.youtube.com/@Cynex_Production",
           ],
         }),
       },

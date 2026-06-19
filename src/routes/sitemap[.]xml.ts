@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+const BASE_URL = "https://cynexproduction.in";
 
 const PATHS = [
   "/",
@@ -19,6 +19,8 @@ const PATHS = [
   "/video-production-company",
   "/corporate-films",
   "/motion-graphics",
+  "/terms",
+  "/privacy",
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({
