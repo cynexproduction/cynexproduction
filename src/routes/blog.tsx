@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db } from "@/integrations/firebase/client";
 import { collection, query, orderBy, getDocs, limit } from "firebase/firestore";
@@ -82,13 +82,10 @@ function BlogPage() {
             ) : (
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
-                  <Link
+                  <a
                     key={post.id}
-                    to="/blog/$slug"
-                    params={{ slug: post.slug }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bg-white border border-[#ddd] rounded-lg overflow-hidden hover:border-primary transition-colors group"
+                    href={`/blog/${post.slug}`}
+                    className="block bg-white border border-[#ddd] rounded-lg overflow-hidden hover:border-primary transition-colors group cursor-pointer"
                   >
                     {post.featured_image && (
                       <div className="aspect-video overflow-hidden bg-[#f5f5f5]">
@@ -106,7 +103,7 @@ function BlogPage() {
                         <p className="text-sm text-[#666] line-clamp-2">{post.excerpt}</p>
                       )}
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             )}
