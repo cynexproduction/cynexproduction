@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db } from "@/integrations/firebase/client";
 import { collection, query, orderBy, getDocs, limit } from "firebase/firestore";
@@ -27,11 +27,11 @@ export const Route = createFileRoute("/blog")({
 });
 
 function BlogPage() {
-  const matches = useMatches();
+  const location = useLocation();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const isChildRoute = matches.some((m) => m.id === "/blog/$slug");
+  const isChildRoute = location.pathname !== "/blog";
 
   useEffect(() => {
     if (isChildRoute) return;
