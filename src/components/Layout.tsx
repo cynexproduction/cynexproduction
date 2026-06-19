@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X, Instagram, Youtube } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -53,30 +55,38 @@ export function Header() {
         </button>
       </div>
 
-      {open && (
-        <div className="lg:hidden bg-black border-t border-[#222]">
-          <nav className="flex flex-col gap-2 p-4">
-            {navLinks.map((link) => (
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden bg-black border-t border-[#222] overflow-hidden"
+          >
+            <nav className="flex flex-col gap-2 p-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="text-sm font-medium text-white/80 hover:text-primary transition-colors py-2"
+                  activeProps={{ className: "text-primary" }}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
               <Link
-                key={link.to}
-                to={link.to}
-                className="text-sm font-medium text-white/80 hover:text-primary transition-colors py-2"
-                activeProps={{ className: "text-primary" }}
+                to="/enquiry"
+                className="text-sm font-semibold bg-primary text-white px-5 py-2 rounded text-center"
                 onClick={() => setOpen(false)}
               >
-                {link.label}
+                Let's Connect
               </Link>
-            ))}
-            <Link
-              to="/enquiry"
-              className="text-sm font-semibold bg-primary text-white px-5 py-2 rounded text-center"
-              onClick={() => setOpen(false)}
-            >
-              Let's Connect
-            </Link>
-          </nav>
-        </div>
-      )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
@@ -145,19 +155,39 @@ export function Footer() {
 }
 
 export function Section({ children, className = "", id, style }: { children: React.ReactNode; className?: string; id?: string; style?: React.CSSProperties }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
-    <section id={id} className={`py-16 md:py-24 ${className}`} style={style}>
+    <motion.section
+      id={id}
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`py-16 md:py-24 ${className}`}
+      style={style}
+    >
       <div>{children}</div>
-    </section>
+    </motion.section>
   );
 }
 
 export function SectionTitle({ label, title, subtitle }: { label?: string; title: string; subtitle?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
   return (
-    <div className="text-center mb-12">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="text-center mb-12"
+    >
       {label && <span className="text-primary text-sm font-semibold uppercase tracking-wider">{label}</span>}
       <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">{title}</h2>
       {subtitle && <p className="text-[#999] mt-3 max-w-2xl mx-auto">{subtitle}</p>}
-    </div>
+    </motion.div>
   );
 }

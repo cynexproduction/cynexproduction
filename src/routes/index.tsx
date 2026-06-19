@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/")({
   component: Page,
@@ -124,15 +125,30 @@ function Page() {
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black z-10" />
         <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            className="text-5xl md:text-7xl font-bold leading-tight mb-6"
+          >
             Creative Agency in{" "}
             <span className="text-primary">Rajkot & Ahmedabad</span>
-          </h1>
-          <p className="text-lg md:text-xl text-[#999] mb-8 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            className="text-lg md:text-xl text-[#999] mb-8 max-w-2xl mx-auto"
+          >
             We craft compelling visual stories that drive results — from ad films and brand
             documentaries to animation and social content.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+            className="flex flex-wrap gap-4 justify-center"
+          >
             <Link
               to="/enquiry"
               className="bg-primary text-white px-8 py-3 rounded font-semibold hover:bg-primary/90 transition-colors"
@@ -145,29 +161,39 @@ function Page() {
             >
               Explore Services
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 2. Service Image Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+        className="grid md:grid-cols-2 lg:grid-cols-3"
+      >
         {serviceCards.map((s, i) => (
-          <Link
+          <motion.div
             key={i}
-            to={s.to as any}
-            className="group relative min-h-[300px] flex items-center justify-center overflow-hidden"
+            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-              style={{ backgroundImage: `url(${s.img})` }}
-            />
-            <div className="absolute inset-0 bg-black/95 group-hover:bg-transparent group-hover:bg-gradient-to-b group-hover:from-transparent group-hover:to-primary/90 transition-all duration-500" />
-            <div className="relative z-10 text-center p-6">
-              <h3 className="text-2xl md:text-[24px] font-medium text-white leading-[35px]">{s.title}</h3>
-            </div>
-          </Link>
+            <Link
+              to={s.to as any}
+              className="group relative min-h-[300px] flex items-center justify-center overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(${s.img})` }}
+              />
+              <div className="absolute inset-0 bg-black/95 group-hover:bg-transparent group-hover:bg-gradient-to-b group-hover:from-transparent group-hover:to-primary/90 transition-all duration-500" />
+              <div className="relative z-10 text-center p-6">
+                <h3 className="text-2xl md:text-[24px] font-medium text-white leading-[35px]">{s.title}</h3>
+              </div>
+            </Link>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* 4. Fancy Text Section - white bg */}
       <Section className="bg-white">
@@ -187,20 +213,30 @@ function Page() {
       {/* 5. Our Expert Capabilities - white bg */}
       <Section className="bg-white !pt-0">
         <SectionTitle title="Our Expert Capabilities" />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {services.map((s, i) => (
-            <Link
+            <motion.div
               key={i}
-              to={s.to as any}
-              className="group text-center"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } } }}
             >
-              <h3 className="text-lg font-semibold text-[#4d4d4d] group-hover:text-primary transition-colors mb-2">
-                {s.title}
-              </h3>
-              <p className="text-sm text-[#4d4d4d] leading-[26px]">{s.desc}</p>
-            </Link>
+              <Link
+                to={s.to as any}
+                className="group text-center block"
+              >
+                <h3 className="text-lg font-semibold text-[#4d4d4d] group-hover:text-primary transition-colors mb-2">
+                  {s.title}
+                </h3>
+                <p className="text-sm text-[#4d4d4d] leading-[26px]">{s.desc}</p>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Section>
 
       {/* 7. Perks to Consider - black bg */}
@@ -211,15 +247,25 @@ function Page() {
             <div className="w-[50px] h-[2px] bg-[#e9204f]" />
           </div>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+          className="grid md:grid-cols-2 lg:grid-cols-5 gap-6"
+        >
           {perks.map((p, i) => (
-            <div key={i} className="text-center">
+            <motion.div
+              key={i}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } } }}
+              className="text-center"
+            >
               <div className="text-4xl mb-4">{p.icon}</div>
               <h3 className="text-lg font-semibold text-white mb-2">{p.title}</h3>
               <p className="text-sm text-[#999]">{p.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Section>
 
       {/* 8. Parallax Section with red-bordered cards */}
@@ -236,14 +282,21 @@ function Page() {
           <p className="text-[#ccc] max-w-xl mx-auto mb-4 text-base leading-[26px]">
             Whether it's a single film or a long-term content mandate, we work with clarity, creativity, and commitment.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+            className="grid md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto"
+          >
             {[
               { title: "Creative Strategy", desc: "Brand story development, creative direction, audience analysis & campaign planning — all built to connect." },
               { title: "Video Production", desc: "Ad films, corporate films, documentaries, music videos, and social content shot with cinematic quality." },
               { title: "Post Production", desc: "Editing, color grading, sound design, VFX, motion graphics & animation — polished to perfection." },
             ].map((item, i) => (
-              <div
+              <motion.div
                 key={i}
+                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
                 className="border-2 border-primary p-[5%] pb-[12%] group hover:shadow-[0_0_31px_5px_rgba(0,0,0,0.21)] transition-all duration-300"
               >
                 <h3 className="text-xl font-semibold text-white group-hover:text-primary transition-colors mb-3">
@@ -252,9 +305,9 @@ function Page() {
                 <p className="text-[17px] text-white group-hover:text-primary transition-colors leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -280,34 +333,54 @@ function Page() {
       {/* 10. Services We Are Known For - white bg */}
       <Section className="bg-white">
         <SectionTitle title="Services we are known for" />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
           {serviceLinks.map((s, i) => (
-            <Link
+            <motion.div
               key={i}
-              to={s.to as any}
-              className="flex items-center justify-between bg-black border-2 border-primary px-5 py-4 hover:text-primary transition-colors group"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } } }}
             >
-              <span className="text-sm font-medium text-white group-hover:text-primary transition-colors">{s.name}</span>
-              <span className="text-white text-2xl font-bold group-hover:text-primary transition-colors">&rarr;</span>
-            </Link>
+              <Link
+                to={s.to as any}
+                className="flex items-center justify-between bg-black border-2 border-primary px-5 py-4 hover:text-primary transition-colors group"
+              >
+                <span className="text-sm font-medium text-white group-hover:text-primary transition-colors">{s.name}</span>
+                <span className="text-white text-2xl font-bold group-hover:text-primary transition-colors">&rarr;</span>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Section>
 
       {/* 13. Testimonials - white bg */}
       <Section className="bg-white !pt-0">
         <SectionTitle title="What our clients say" />
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+          className="grid md:grid-cols-2 gap-8"
+        >
           {testimonials.map((t, i) => (
-            <div key={i} className="border border-[#ddd] rounded-lg p-6">
+            <motion.div
+              key={i}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
+              className="border border-[#ddd] rounded-lg p-6"
+            >
               <p className="text-[#666] mb-4 italic leading-relaxed">"{t.quote}"</p>
               <div>
                 <strong className="text-[#333] block">{t.author}</strong>
                 <span className="text-sm text-[#999]">{t.role}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Section>
 
       <VideoSection page="/" />

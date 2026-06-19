@@ -4,9 +4,11 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
 
 import appCss from "../styles.css?url";
 
@@ -83,10 +85,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Creative video production house — ad films, brand videos, corporate films, animation, music videos and documentaries in Rajkot & Ahmedabad." },
     ],
     links: [
-      { rel: "icon", href: "/favicon.ico" },
-      { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
-      { rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon-64x64.png" },
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "icon", href: "/cynex-logo.png" },
+      { rel: "apple-touch-icon", href: "/cynex-logo.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -147,10 +147,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
     </QueryClientProvider>
   );
 }
