@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideoProductionCompanyRouteImport } from './routes/video-production-company'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StudioRentalRouteImport } from './routes/studio-rental'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MusicVideoProductionServicesRouteImport } from './routes/music-video-production-services'
 import { Route as MotionGraphicsRouteImport } from './routes/motion-graphics'
@@ -50,11 +49,6 @@ const TermsRoute = TermsRouteImport.update({
 const StudioRentalRoute = StudioRentalRouteImport.update({
   id: '/studio-rental',
   path: '/studio-rental',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -193,7 +187,6 @@ export interface FileRoutesByFullPath {
   '/motion-graphics': typeof MotionGraphicsRoute
   '/music-video-production-services': typeof MusicVideoProductionServicesRoute
   '/privacy': typeof PrivacyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
   '/video-production-company': typeof VideoProductionCompanyRoute
@@ -221,7 +214,6 @@ export interface FileRoutesByTo {
   '/motion-graphics': typeof MotionGraphicsRoute
   '/music-video-production-services': typeof MusicVideoProductionServicesRoute
   '/privacy': typeof PrivacyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
   '/video-production-company': typeof VideoProductionCompanyRoute
@@ -251,7 +243,6 @@ export interface FileRoutesById {
   '/motion-graphics': typeof MotionGraphicsRoute
   '/music-video-production-services': typeof MusicVideoProductionServicesRoute
   '/privacy': typeof PrivacyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studio-rental': typeof StudioRentalRoute
   '/terms': typeof TermsRoute
   '/video-production-company': typeof VideoProductionCompanyRoute
@@ -281,7 +272,6 @@ export interface FileRouteTypes {
     | '/motion-graphics'
     | '/music-video-production-services'
     | '/privacy'
-    | '/sitemap.xml'
     | '/studio-rental'
     | '/terms'
     | '/video-production-company'
@@ -309,7 +299,6 @@ export interface FileRouteTypes {
     | '/motion-graphics'
     | '/music-video-production-services'
     | '/privacy'
-    | '/sitemap.xml'
     | '/studio-rental'
     | '/terms'
     | '/video-production-company'
@@ -338,7 +327,6 @@ export interface FileRouteTypes {
     | '/motion-graphics'
     | '/music-video-production-services'
     | '/privacy'
-    | '/sitemap.xml'
     | '/studio-rental'
     | '/terms'
     | '/video-production-company'
@@ -368,7 +356,6 @@ export interface RootRouteChildren {
   MotionGraphicsRoute: typeof MotionGraphicsRoute
   MusicVideoProductionServicesRoute: typeof MusicVideoProductionServicesRoute
   PrivacyRoute: typeof PrivacyRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StudioRentalRoute: typeof StudioRentalRoute
   TermsRoute: typeof TermsRoute
   VideoProductionCompanyRoute: typeof VideoProductionCompanyRoute
@@ -397,13 +384,6 @@ declare module '@tanstack/react-router' {
       path: '/studio-rental'
       fullPath: '/studio-rental'
       preLoaderRoute: typeof StudioRentalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -615,7 +595,6 @@ const rootRouteChildren: RootRouteChildren = {
   MotionGraphicsRoute: MotionGraphicsRoute,
   MusicVideoProductionServicesRoute: MusicVideoProductionServicesRoute,
   PrivacyRoute: PrivacyRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StudioRentalRoute: StudioRentalRoute,
   TermsRoute: TermsRoute,
   VideoProductionCompanyRoute: VideoProductionCompanyRoute,
